@@ -76,7 +76,7 @@ type Items []Item
 type Item struct {
 	CostCurrency  Currency       `json:"cost_currency"`
 	CostValue     string         `json:"cost_value"`
-	DroppofPoint  int64          `json:"droppof_point"`
+	DropoffPoint  int64          `json:"droppof_point"`
 	ExtraID       string         `json:"extra_id"`
 	Fiscalization *Fiscalization `json:"fiscalization"`
 	PickupPoint   int64          `json:"pickup_point"`

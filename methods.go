@@ -17,6 +17,16 @@ func (yc *YandexClient) DeliveryMethods(token string, payload models.DeliveryMet
 	return post[responses.APIResponseDeliveryMethods](token, yc.url, methodDeliveryMethods, addValues(nil, opts), jsn)
 }
 
+// CheckPrice 2.1. Первичная оценка стоимости без создания заявки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2CheckPrice.html
+func (yc *YandexClient) CheckPrice(token string, payload models.CheckPriceRequest, opts *options.CheckPriceOptions) (res responses.APIResponseCheckPrice, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseCheckPrice{}, err
+	}
+
+	return post[responses.APIResponseCheckPrice](token, yc.url, methodCheckPrice, addValues(nil, opts), jsn)
+}
+
 // Create 3.1. Создание заявки. https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsCreate.html
 func (yc *YandexClient) Create(token string, payload models.CreateRequest, opts *options.CreateOptions) (res responses.APIResponseInfo, err error) {
 	jsn, err := json.Marshal(payload)

@@ -7,6 +7,8 @@ import (
 )
 
 type YandexLogistics interface {
+	DeliveryMethods(token string, payload models.DeliveryMethodsRequest, opts *options.DeliveryMethodsOptions) (res responses.APIResponseDeliveryMethods, err error)
+
 	Create(token string, payload models.CreateRequest, opts *options.CreateOptions) (res responses.APIResponseInfo, err error)
 	Accept(token string, payload models.AcceptRequest, opts *options.AcceptOptions) (res responses.APIResponseAccept, err error)
 	Info(token string, opts *options.InfoOptions) (res responses.APIResponseInfo, err error)
