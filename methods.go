@@ -136,3 +136,13 @@ func (yc *YandexClient) CourierPosition(token string, payload models.CourierPosi
 
 	return post[responses.APIResponseCourierPosition](token, yc.url, methodCourierPosition, addValues(nil, opts), jsn)
 }
+
+// TrackingLinks 5.3. Получение ссылок для отслеживания курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsTrackingLinks.html
+func (yc *YandexClient) TrackingLinks(token string, payload models.TrackingLinksRequest, opts *options.TrackingLinksOptions) (res responses.APIResponseTrackingLinks, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseTrackingLinks{}, err
+	}
+
+	return post[responses.APIResponseTrackingLinks](token, yc.url, methodTrackingLinks, addValues(nil, opts), jsn)
+}

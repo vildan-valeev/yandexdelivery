@@ -20,6 +20,7 @@ const (
 	methodReturn          = "claims/return"
 	methodCourierPhone    = "driver-voiceforwarding"
 	methodCourierPosition = "claims/performer-position"
+	methodTrackingLinks   = "claims/tracking-links"
 )
 
 type YandexClient struct {

@@ -24,4 +24,5 @@ type YandexLogistics interface {
 
 	CourierPhone(token string, payload models.CourierPhoneRequest, opts *options.CourierPhoneOptions) (res responses.APIResponseCourierPhone, err error)
 	CourierPosition(token string, payload models.CourierPositionRequest, opts *options.CourierPositionOptions) (res responses.APIResponseCourierPosition, err error)
+	TrackingLinks(token string, payload models.TrackingLinksRequest, opts *options.TrackingLinksOptions) (res responses.APIResponseTrackingLinks, err error)
 }
