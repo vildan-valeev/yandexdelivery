@@ -27,6 +27,16 @@ func (yc *YandexClient) CheckPrice(token string, payload models.CheckPriceReques
 	return post[responses.APIResponseCheckPrice](token, yc.url, methodCheckPrice, addValues(nil, opts), jsn)
 }
 
+// 2.2. Получение тарифов, доступных в точке https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2Tariffs.html
+func (yc *YandexClient) Tariffs(token string, payload models.TariffsRequest, opts *options.TariffsOptions) (res responses.APIResponseTariffs, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseTariffs{}, err
+	}
+
+	return post[responses.APIResponseTariffs](token, yc.url, methodTariffs, addValues(nil, opts), jsn)
+}
+
 // Create 3.1. Создание заявки. https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsCreate.html
 func (yc *YandexClient) Create(token string, payload models.CreateRequest, opts *options.CreateOptions) (res responses.APIResponseInfo, err error) {
 	jsn, err := json.Marshal(payload)

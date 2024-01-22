@@ -9,6 +9,7 @@ const (
 	methodBase            = "b2b/cargo/integration/v2/"
 	methodDeliveryMethods = "delivery-methods"
 	methodCheckPrice      = "check-price"
+	methodTariffs         = "tariffs"
 	methodCreate          = "claims/create"
 	methodAccept          = "claims/accept"
 	methodInfo            = "claims/info"

@@ -17,9 +17,9 @@ type CheckPriceItem struct {
 }
 
 type RoutePoint struct {
-	Coordinates [][2]int64 `json:"coordinates"`
-	FullName    string     `json:"fullname"`
-	ID          int64      `json:"id"`
+	Coordinates []float64 `json:"coordinates"`
+	FullName    string    `json:"fullname"`
+	ID          int64     `json:"id"`
 }
 
 type CheckPriceResponse struct {
