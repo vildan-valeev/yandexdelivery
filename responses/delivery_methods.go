@@ -3,7 +3,7 @@ package responses
 import "github.com/vildan-valeev/yandexlogistic/models"
 
 type APIResponseDeliveryMethods struct {
-	models.AcceptResponse
+	models.DeliveryMethodsResponse
 	APIResponseBase
 }
 

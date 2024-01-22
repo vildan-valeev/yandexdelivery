@@ -8,17 +8,17 @@ import (
 )
 
 // DeliveryMethods 1.1. Интервалы «Доставки в течение дня» https://yandex.ru/dev/logistics/api/ref/same-day/IntegrationV2DeliveryMethods.html
-func (yc YandexClient) DeliveryMethods(token string, payload models.DeliveryMethodsRequest, opts *options.DeliveryMethodsOptions) (res responses.APIResponseDeliveryMethods, err error) {
+func (yc *YandexClient) DeliveryMethods(token string, payload models.DeliveryMethodsRequest, opts *options.DeliveryMethodsOptions) (res responses.APIResponseDeliveryMethods, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseDeliveryMethods{}, err
 	}
 
-	return post[responses.APIResponseDeliveryMethods](token, yc.url, methodCreate, addValues(nil, opts), jsn)
+	return post[responses.APIResponseDeliveryMethods](token, yc.url, methodDeliveryMethods, addValues(nil, opts), jsn)
 }
 
 // Create 3.1. Создание заявки. https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsCreate.html
-func (yc YandexClient) Create(token string, payload models.CreateRequest, opts *options.CreateOptions) (res responses.APIResponseInfo, err error) {
+func (yc *YandexClient) Create(token string, payload models.CreateRequest, opts *options.CreateOptions) (res responses.APIResponseInfo, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseInfo{}, err
@@ -28,7 +28,7 @@ func (yc YandexClient) Create(token string, payload models.CreateRequest, opts *
 }
 
 // Accept 3.2. Подтверждение заявки https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsAccept.html
-func (yc YandexClient) Accept(token string, payload models.AcceptRequest, opts *options.AcceptOptions) (res responses.APIResponseAccept, err error) {
+func (yc *YandexClient) Accept(token string, payload models.AcceptRequest, opts *options.AcceptOptions) (res responses.APIResponseAccept, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseAccept{}, err
@@ -37,11 +37,11 @@ func (yc YandexClient) Accept(token string, payload models.AcceptRequest, opts *
 	return post[responses.APIResponseAccept](token, yc.url, methodAccept, addValues(nil, opts), jsn)
 }
 
-func (yc YandexClient) Info(token string, opts *options.InfoOptions) (res responses.APIResponseInfo, err error) {
+func (yc *YandexClient) Info(token string, opts *options.InfoOptions) (res responses.APIResponseInfo, err error) {
 	return post[responses.APIResponseInfo](token, yc.url, methodInfo, addValues(nil, opts), nil)
 }
 
-func (yc YandexClient) Cancel(token string, payload models.CancelRequest, opts *options.CancelOptions) (res responses.APIResponseCancel, err error) {
+func (yc *YandexClient) Cancel(token string, payload models.CancelRequest, opts *options.CancelOptions) (res responses.APIResponseCancel, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseCancel{}, err

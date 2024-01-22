@@ -6,11 +6,12 @@ import (
 )
 
 const (
-	methodBase   = "b2b/cargo/integration/v2/claims/"
-	methodCreate = "create"
-	methodAccept = "accept"
-	methodInfo   = "info"
-	methodCancel = "cancel"
+	methodBase            = "b2b/cargo/integration/v2/"
+	methodDeliveryMethods = "delivery-methods"
+	methodCreate          = "claims/create"
+	methodAccept          = "claims/accept"
+	methodInfo            = "claims/info"
+	methodCancel          = "claims/cancel"
 )
 
 type YandexClient struct {
@@ -19,6 +20,7 @@ type YandexClient struct {
 }
 
 func NewYandexClient(urlBase string) *YandexClient {
+	// TODO: перенести токен в клиента
 	u, err := url.JoinPath(urlBase, methodBase)
 	if err != nil {
 		log.Fatal(err)
