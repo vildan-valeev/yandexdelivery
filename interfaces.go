@@ -21,4 +21,6 @@ type YandexLogistics interface {
 	CancelInfo(token string, payload models.CancelInfoRequest, opts *options.CancelInfoOptions) (res responses.APIResponseCancelInfo, err error)
 	Cancel(token string, payload models.CancelRequest, opts *options.CancelOptions) (res responses.APIResponseCancel, err error)
 	Return(token string, payload models.ReturnRequest, opts *options.ReturnOptions) (res responses.APIResponseReturn, err error)
+
+	DriverPhone(token string, payload models.DriverPhoneRequest, opts *options.DriverPhoneOptions) (res responses.APIResponseDriverPhone, err error)
 }

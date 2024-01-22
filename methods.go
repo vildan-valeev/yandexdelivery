@@ -116,3 +116,13 @@ func (yc *YandexClient) Return(token string, payload models.ReturnRequest, opts 
 
 	return post[responses.APIResponseReturn](token, yc.url, methodReturn, addValues(nil, opts), jsn)
 }
+
+// DriverPhone 5.1. Получение номера телефона курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2DriverVoiceForwarding.html
+func (yc *YandexClient) DriverPhone(token string, payload models.DriverPhoneRequest, opts *options.DriverPhoneOptions) (res responses.APIResponseDriverPhone, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseDriverPhone{}, err
+	}
+
+	return post[responses.APIResponseDriverPhone](token, yc.url, methodDriverPhone, addValues(nil, opts), jsn)
+}
