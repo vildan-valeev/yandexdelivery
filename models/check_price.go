@@ -1,13 +1,13 @@
 package models
 
 type CheckPriceRequest struct {
-	Items          []CheckPriceItem      `json:"items"`
+	Items          []DeliveryItem        `json:"items"`
 	Requirements   CheckPriceRequirement `json:"requirements"`
 	RoutePoints    []RoutePoint          `json:"route_points"`
 	SkipDoorToDoor bool                  `json:"skip_door_to_door"`
 }
 
-type CheckPriceItem struct {
+type DeliveryItem struct {
 	DropoffPoint int64   `json:"droppof_point"`
 	PickupPoint  int64   `json:"pickup_point"`
 	Quantity     int64   `json:"quantity"`

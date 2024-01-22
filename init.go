@@ -10,6 +10,7 @@ const (
 	methodDeliveryMethods = "delivery-methods"
 	methodCheckPrice      = "check-price"
 	methodTariffs         = "tariffs"
+	methodOffersCalculate = "offers/calculate"
 	methodCreate          = "claims/create"
 	methodAccept          = "claims/accept"
 	methodInfo            = "claims/info"

@@ -37,6 +37,16 @@ func (yc *YandexClient) Tariffs(token string, payload models.TariffsRequest, opt
 	return post[responses.APIResponseTariffs](token, yc.url, methodTariffs, addValues(nil, opts), jsn)
 }
 
+// 2.3. Получение вариантов доставки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2OfferCalculate.html
+func (yc *YandexClient) OffersCalculate(token string, payload models.OffersCalculateRequest, opts *options.OffersCalculateOptions) (res responses.APIResponseOffersCalculate, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseOffersCalculate{}, err
+	}
+
+	return post[responses.APIResponseOffersCalculate](token, yc.url, methodOffersCalculate, addValues(nil, opts), jsn)
+}
+
 // Create 3.1. Создание заявки. https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsCreate.html
 func (yc *YandexClient) Create(token string, payload models.CreateRequest, opts *options.CreateOptions) (res responses.APIResponseInfo, err error) {
 	jsn, err := json.Marshal(payload)
@@ -57,6 +67,17 @@ func (yc *YandexClient) Accept(token string, payload models.AcceptRequest, opts 
 	return post[responses.APIResponseAccept](token, yc.url, methodAccept, addValues(nil, opts), jsn)
 }
 
+// Search 3.3. Поиск заявок https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsSearch.html
+func (yc *YandexClient) Search(token string, payload models.SearchRequest, opts *options.SearchOptions) (res responses.APIResponseSearch, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseInfo{}, err
+	}
+
+	return post[responses.APIResponseSearch](token, yc.url, methodCreate, addValues(nil, opts), jsn)
+}
+
+// Info 3.4. Получение информации по заявке https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsInfo.html
 func (yc *YandexClient) Info(token string, opts *options.InfoOptions) (res responses.APIResponseInfo, err error) {
 	return post[responses.APIResponseInfo](token, yc.url, methodInfo, addValues(nil, opts), nil)
 }
