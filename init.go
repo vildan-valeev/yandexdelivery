@@ -18,7 +18,8 @@ const (
 	methodCancelInfo      = "claims/cancel-info"
 	methodCancel          = "claims/cancel"
 	methodReturn          = "claims/return"
-	methodDriverPhone     = "driver-voiceforwarding"
+	methodCourierPhone    = "driver-voiceforwarding"
+	methodCourierPosition = "claims/performer-position"
 )
 
 type YandexClient struct {

@@ -22,5 +22,6 @@ type YandexLogistics interface {
 	Cancel(token string, payload models.CancelRequest, opts *options.CancelOptions) (res responses.APIResponseCancel, err error)
 	Return(token string, payload models.ReturnRequest, opts *options.ReturnOptions) (res responses.APIResponseReturn, err error)
 
-	DriverPhone(token string, payload models.DriverPhoneRequest, opts *options.DriverPhoneOptions) (res responses.APIResponseDriverPhone, err error)
+	CourierPhone(token string, payload models.CourierPhoneRequest, opts *options.CourierPhoneOptions) (res responses.APIResponseCourierPhone, err error)
+	CourierPosition(token string, payload models.CourierPositionRequest, opts *options.CourierPositionOptions) (res responses.APIResponseCourierPosition, err error)
 }

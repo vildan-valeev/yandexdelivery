@@ -117,12 +117,22 @@ func (yc *YandexClient) Return(token string, payload models.ReturnRequest, opts 
 	return post[responses.APIResponseReturn](token, yc.url, methodReturn, addValues(nil, opts), jsn)
 }
 
-// DriverPhone 5.1. Получение номера телефона курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2DriverVoiceForwarding.html
-func (yc *YandexClient) DriverPhone(token string, payload models.DriverPhoneRequest, opts *options.DriverPhoneOptions) (res responses.APIResponseDriverPhone, err error) {
+// CourierPhone 5.1. Получение номера телефона курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2DriverVoiceForwarding.html
+func (yc *YandexClient) CourierPhone(token string, payload models.CourierPhoneRequest, opts *options.CourierPhoneOptions) (res responses.APIResponseCourierPhone, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
-		return responses.APIResponseDriverPhone{}, err
+		return responses.APIResponseCourierPhone{}, err
 	}
 
-	return post[responses.APIResponseDriverPhone](token, yc.url, methodDriverPhone, addValues(nil, opts), jsn)
+	return post[responses.APIResponseCourierPhone](token, yc.url, methodCourierPhone, addValues(nil, opts), jsn)
+}
+
+// CourierPosition 5.2. Получение местоположения курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsPerformerPosition.html
+func (yc *YandexClient) CourierPosition(token string, payload models.CourierPositionRequest, opts *options.CourierPositionOptions) (res responses.APIResponseCourierPosition, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseCourierPosition{}, err
+	}
+
+	return post[responses.APIResponseCourierPosition](token, yc.url, methodCourierPosition, addValues(nil, opts), jsn)
 }
