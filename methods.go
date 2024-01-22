@@ -71,10 +71,10 @@ func (yc *YandexClient) Accept(token string, payload models.AcceptRequest, opts 
 func (yc *YandexClient) Search(token string, payload models.SearchRequest, opts *options.SearchOptions) (res responses.APIResponseSearch, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
-		return responses.APIResponseInfo{}, err
+		return responses.APIResponseSearch{}, err
 	}
 
-	return post[responses.APIResponseSearch](token, yc.url, methodCreate, addValues(nil, opts), jsn)
+	return post[responses.APIResponseSearch](token, yc.url, methodSearch, addValues(nil, opts), jsn)
 }
 
 // Info 3.4. Получение информации по заявке https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsInfo.html
@@ -82,6 +82,17 @@ func (yc *YandexClient) Info(token string, opts *options.InfoOptions) (res respo
 	return post[responses.APIResponseInfo](token, yc.url, methodInfo, addValues(nil, opts), nil)
 }
 
+// CancelInfo 4.1. Получение признака отмены https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsCancelInfo.html
+func (yc *YandexClient) CancelInfo(token string, payload models.CancelInfoRequest, opts *options.CancelInfoOptions) (res responses.APIResponseCancelInfo, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseCancelInfo{}, err
+	}
+
+	return post[responses.APIResponseCancelInfo](token, yc.url, methodCancelInfo, addValues(nil, opts), jsn)
+}
+
+// Cancel 4.2. Отмена заявки https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsCancel.html
 func (yc *YandexClient) Cancel(token string, payload models.CancelRequest, opts *options.CancelOptions) (res responses.APIResponseCancel, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {

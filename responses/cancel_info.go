@@ -2,12 +2,12 @@ package responses
 
 import "github.com/vildan-valeev/yandexlogistic/models"
 
-type APIResponseInfo struct {
-	models.Claim
+type APIResponseCancelInfo struct {
+	models.CancelInfoResponse
 	APIResponseBase
 }
 
 // Base returns the contained object of type APIResponseBase.
-func (a APIResponseInfo) Base() APIResponseBase {
+func (a APIResponseCancelInfo) Base() APIResponseBase {
 	return a.APIResponseBase
 }

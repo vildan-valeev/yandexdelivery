@@ -4,7 +4,7 @@ import (
 	"errors"
 )
 
-type InfoResponse struct {
+type Claim struct {
 	AvailableCancelState string             `json:"available_cancel_state"`
 	CallbackProperties   CallbackProperties `json:"callback_properties"`
 	CarrierInfo          CarrierInfo        `json:"carrier_info"`

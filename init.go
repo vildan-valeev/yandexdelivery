@@ -13,7 +13,9 @@ const (
 	methodOffersCalculate = "offers/calculate"
 	methodCreate          = "claims/create"
 	methodAccept          = "claims/accept"
+	methodSearch          = "claims/search"
 	methodInfo            = "claims/info"
+	methodCancelInfo      = "claims/cancel-info"
 	methodCancel          = "claims/cancel"
 )
 
