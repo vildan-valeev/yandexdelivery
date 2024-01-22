@@ -17,6 +17,7 @@ const (
 	methodInfo            = "claims/info"
 	methodCancelInfo      = "claims/cancel-info"
 	methodCancel          = "claims/cancel"
+	methodReturn          = "claims/return"
 )
 
 type YandexClient struct {

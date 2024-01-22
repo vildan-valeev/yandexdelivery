@@ -78,8 +78,13 @@ func (yc *YandexClient) Search(token string, payload models.SearchRequest, opts 
 }
 
 // Info 3.4. Получение информации по заявке https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsInfo.html
-func (yc *YandexClient) Info(token string, opts *options.InfoOptions) (res responses.APIResponseInfo, err error) {
-	return post[responses.APIResponseInfo](token, yc.url, methodInfo, addValues(nil, opts), nil)
+func (yc *YandexClient) Info(token string, payload models.InfoRequest, opts *options.InfoOptions) (res responses.APIResponseInfo, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseInfo{}, err
+	}
+
+	return post[responses.APIResponseInfo](token, yc.url, methodInfo, addValues(nil, opts), jsn)
 }
 
 // CancelInfo 4.1. Получение признака отмены https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsCancelInfo.html
@@ -100,4 +105,14 @@ func (yc *YandexClient) Cancel(token string, payload models.CancelRequest, opts 
 	}
 
 	return post[responses.APIResponseCancel](token, yc.url, methodCancel, addValues(nil, opts), jsn)
+}
+
+// Return 4.3. Пропуск точки в заказе с мультиточками. https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsReturn.html
+func (yc *YandexClient) Return(token string, payload models.ReturnRequest, opts *options.ReturnOptions) (res responses.APIResponseReturn, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseReturn{}, err
+	}
+
+	return post[responses.APIResponseReturn](token, yc.url, methodReturn, addValues(nil, opts), jsn)
 }
