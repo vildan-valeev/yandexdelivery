@@ -1,6 +1,6 @@
 package models
 
-import "devgit.apteka-aprel.ru/web/transporters/pkg/yandex_logistics/models/create"
+import "github.com/vildan-valeev/yandexlogistic/models/create"
 
 type CreateRequest struct {
 	AutoAccept          bool                `json:"auto_accept,omitempty"`

@@ -4,13 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/vildan-valeev/yandexlogistic/responses"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 )
 
-func post[T APIResponse](token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
+func post[T responses.APIResponse](token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
 	u, err := joinURL(base, endpoint, vals)
 	if err != nil {
 		return res, err
@@ -37,7 +38,7 @@ func post[T APIResponse](token, base, endpoint string, vals url.Values, payload 
 	return
 }
 
-func check(code int, r APIResponse) error {
+func check(code int, r responses.APIResponse) error {
 	b := r.Base()
 	// обрабатываем только те, что допустимы по документации YandexAPI https://yandex.ru/dev/logistics/api/about/intro.html
 	// все остальное в default error
