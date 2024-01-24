@@ -23,6 +23,7 @@ const (
 	methodTrackingLinks    = "claims/tracking-links"
 	methodConfirmationCode = "claims/confirmation_code"
 	methodDocument         = "claims/document"
+	methodBulkInfo         = "claims/bulk_info"
 )
 
 type YandexClient struct {

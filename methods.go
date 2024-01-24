@@ -134,7 +134,7 @@ func (yc *YandexClient) CourierPosition(token string, payload models.CourierPosi
 		return responses.APIResponseCourierPosition{}, err
 	}
 
-	return post[responses.APIResponseCourierPosition](token, yc.url, methodCourierPosition, addValues(nil, opts), jsn)
+	return get[responses.APIResponseCourierPosition](token, yc.url, methodCourierPosition, addValues(nil, opts), jsn)
 }
 
 // TrackingLinks 5.3. Получение ссылок для отслеживания курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsTrackingLinks.html
@@ -144,7 +144,7 @@ func (yc *YandexClient) TrackingLinks(token string, payload models.TrackingLinks
 		return responses.APIResponseTrackingLinks{}, err
 	}
 
-	return post[responses.APIResponseTrackingLinks](token, yc.url, methodTrackingLinks, addValues(nil, opts), jsn)
+	return get[responses.APIResponseTrackingLinks](token, yc.url, methodTrackingLinks, addValues(nil, opts), jsn)
 }
 
 // ConfirmationCode 6.1. Получение кода подтверждения https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsConfirmationCode.html
@@ -155,4 +155,14 @@ func (yc *YandexClient) ConfirmationCode(token string, payload models.Confirmati
 	}
 
 	return post[responses.APIResponseConfirmationCode](token, yc.url, methodConfirmationCode, addValues(nil, opts), jsn)
+}
+
+// Document 6.2. Получение акта приёма-передачи https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsDocument.html
+func (yc *YandexClient) Document(token string, payload models.DocumentRequest, opts *options.DocumentOptions) (res responses.APIResponseDocument, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseDocument{}, err
+	}
+	// TODO: получение файла - переделать запрос!!!!!
+	return getFile[responses.APIResponseDocument](token, yc.url, methodDocument, addValues(nil, opts), jsn)
 }
