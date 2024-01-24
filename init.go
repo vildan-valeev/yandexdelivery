@@ -26,6 +26,7 @@ const (
 	methodBulkInfo         = "claims/bulk_info"
 	methodJournal          = "claims/journal"
 	methodPointsEta        = "claims/points-eta"
+	methodEdit             = "claims/edit"
 )
 
 type YandexClient struct {

@@ -196,3 +196,13 @@ func (yc *YandexClient) PointsEta(token string, payload models.PointsEtaRequest,
 
 	return post[responses.APIResponsePointsEta](token, yc.url, methodPointsEta, addValues(nil, opts), jsn)
 }
+
+// Edit 8.1. Редактирование заявки до её подтверждения https://yandex.ru/dev/logistics/api/ref/claim-edit/IntegrationV2ClaimsEdit.html
+func (yc *YandexClient) Edit(token string, payload models.EditRequest, opts *options.EditOptions) (res responses.APIResponseEdit, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseEdit{}, err
+	}
+
+	return post[responses.APIResponseEdit](token, yc.url, methodEdit, addValues(nil, opts), jsn)
+}
