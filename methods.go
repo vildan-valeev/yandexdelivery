@@ -186,3 +186,13 @@ func (yc *YandexClient) Journal(token string, payload models.JournalRequest, opt
 
 	return post[responses.APIResponseJournal](token, yc.url, methodJournal, addValues(nil, opts), jsn)
 }
+
+// PointsEta 7.3. Получение прогноза по времени прибытия на точки  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsPointsEta.html
+func (yc *YandexClient) PointsEta(token string, payload models.PointsEtaRequest, opts *options.PointsEtaOptions) (res responses.APIResponsePointsEta, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponsePointsEta{}, err
+	}
+
+	return post[responses.APIResponsePointsEta](token, yc.url, methodPointsEta, addValues(nil, opts), jsn)
+}
