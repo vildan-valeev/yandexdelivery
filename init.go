@@ -24,6 +24,7 @@ const (
 	methodConfirmationCode = "claims/confirmation_code"
 	methodDocument         = "claims/document"
 	methodBulkInfo         = "claims/bulk_info"
+	methodJournal          = "claims/journal"
 )
 
 type YandexClient struct {

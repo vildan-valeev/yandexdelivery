@@ -166,3 +166,13 @@ func (yc *YandexClient) Document(token string, payload models.DocumentRequest, o
 	// TODO: получение файла - переделать запрос!!!!!
 	return getFile[responses.APIResponseDocument](token, yc.url, methodDocument, addValues(nil, opts), jsn)
 }
+
+// BulkInfo 7.1. Получение информации по нескольким заявкам  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsBulkInfo.html
+func (yc *YandexClient) BulkInfo(token string, payload models.BulkInfoRequest, opts *options.BulkInfoOptions) (res responses.APIResponseBulkInfo, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseBulkInfo{}, err
+	}
+
+	return post[responses.APIResponseBulkInfo](token, yc.url, methodBulkInfo, addValues(nil, opts), jsn)
+}
