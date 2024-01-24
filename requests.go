@@ -17,7 +17,34 @@ func post[T responses.APIResponse](token, base, endpoint string, vals url.Values
 		return res, err
 	}
 	fmt.Println("YANDEX BODY REQUEST", string(payload))
-	statusCode, cnt, err := sendPostRequest(token, u, payload)
+	statusCode, cnt, err := sendRequest(http.MethodPost, token, u, payload)
+	if err != nil {
+		return res, err
+	}
+
+	// Debug
+	dst := &bytes.Buffer{}
+	if err = json.Indent(dst, cnt, "", "  "); err != nil {
+		log.Println(err)
+	}
+	fmt.Println("YANDEX BODY RESPONSE", dst.String())
+	// End Debug
+
+	if err = json.Unmarshal(cnt, &res); err != nil {
+		return
+	}
+
+	err = check(statusCode, res)
+	return
+}
+
+func get[T responses.APIResponse](token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
+	u, err := joinURL(base, endpoint, vals)
+	if err != nil {
+		return res, err
+	}
+	fmt.Println("YANDEX BODY REQUEST", string(payload))
+	statusCode, cnt, err := sendRequest(http.MethodGet, token, u, payload)
 	if err != nil {
 		return res, err
 	}
@@ -53,26 +80,10 @@ func check(code int, r responses.APIResponse) error {
 	}
 }
 
-// sendGetRequest is used to send an HTTP GET request.
-func sendGetRequest(url string) (int, []byte, error) {
-	resp, err := http.Get(url)
-	if err != nil {
-		return 0, []byte{}, err
-	}
-	defer resp.Body.Close()
-
-	data, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return 0, []byte{}, err
-	}
-
-	return resp.StatusCode, data, nil
-}
-
 // sendPostRequest is used to send an HTTP POST request.
-func sendPostRequest(token, url string, payload []byte) (int, []byte, error) {
+func sendRequest(method, token, url string, payload []byte) (int, []byte, error) {
 
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(payload))
+	req, err := http.NewRequest(method, url, bytes.NewBuffer(payload))
 	if err != nil {
 		return 0, []byte{}, err
 	}

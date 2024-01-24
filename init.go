@@ -6,21 +6,23 @@ import (
 )
 
 const (
-	methodBase            = "b2b/cargo/integration/v2/"
-	methodDeliveryMethods = "delivery-methods"
-	methodCheckPrice      = "check-price"
-	methodTariffs         = "tariffs"
-	methodOffersCalculate = "offers/calculate"
-	methodCreate          = "claims/create"
-	methodAccept          = "claims/accept"
-	methodSearch          = "claims/search"
-	methodInfo            = "claims/info"
-	methodCancelInfo      = "claims/cancel-info"
-	methodCancel          = "claims/cancel"
-	methodReturn          = "claims/return"
-	methodCourierPhone    = "driver-voiceforwarding"
-	methodCourierPosition = "claims/performer-position"
-	methodTrackingLinks   = "claims/tracking-links"
+	methodBase             = "b2b/cargo/integration/v2/"
+	methodDeliveryMethods  = "delivery-methods"
+	methodCheckPrice       = "check-price"
+	methodTariffs          = "tariffs"
+	methodOffersCalculate  = "offers/calculate"
+	methodCreate           = "claims/create"
+	methodAccept           = "claims/accept"
+	methodSearch           = "claims/search"
+	methodInfo             = "claims/info"
+	methodCancelInfo       = "claims/cancel-info"
+	methodCancel           = "claims/cancel"
+	methodReturn           = "claims/return"
+	methodCourierPhone     = "driver-voiceforwarding"
+	methodCourierPosition  = "claims/performer-position"
+	methodTrackingLinks    = "claims/tracking-links"
+	methodConfirmationCode = "claims/confirmation_code"
+	methodDocument         = "claims/document"
 )
 
 type YandexClient struct {

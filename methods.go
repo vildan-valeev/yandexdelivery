@@ -27,7 +27,7 @@ func (yc *YandexClient) CheckPrice(token string, payload models.CheckPriceReques
 	return post[responses.APIResponseCheckPrice](token, yc.url, methodCheckPrice, addValues(nil, opts), jsn)
 }
 
-// 2.2. Получение тарифов, доступных в точке https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2Tariffs.html
+// Tariffs 2.2. Получение тарифов, доступных в точке https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2Tariffs.html
 func (yc *YandexClient) Tariffs(token string, payload models.TariffsRequest, opts *options.TariffsOptions) (res responses.APIResponseTariffs, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
@@ -37,7 +37,7 @@ func (yc *YandexClient) Tariffs(token string, payload models.TariffsRequest, opt
 	return post[responses.APIResponseTariffs](token, yc.url, methodTariffs, addValues(nil, opts), jsn)
 }
 
-// 2.3. Получение вариантов доставки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2OfferCalculate.html
+// OffersCalculate 2.3. Получение вариантов доставки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2OfferCalculate.html
 func (yc *YandexClient) OffersCalculate(token string, payload models.OffersCalculateRequest, opts *options.OffersCalculateOptions) (res responses.APIResponseOffersCalculate, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
@@ -145,4 +145,14 @@ func (yc *YandexClient) TrackingLinks(token string, payload models.TrackingLinks
 	}
 
 	return post[responses.APIResponseTrackingLinks](token, yc.url, methodTrackingLinks, addValues(nil, opts), jsn)
+}
+
+// ConfirmationCode 6.1. Получение кода подтверждения https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsConfirmationCode.html
+func (yc *YandexClient) ConfirmationCode(token string, payload models.ConfirmationCodeRequest, opts *options.ConfirmationCodeOptions) (res responses.APIResponseConfirmationCode, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseConfirmationCode{}, err
+	}
+
+	return post[responses.APIResponseConfirmationCode](token, yc.url, methodConfirmationCode, addValues(nil, opts), jsn)
 }
