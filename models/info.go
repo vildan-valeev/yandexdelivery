@@ -236,13 +236,12 @@ type ExternalOrderCost struct {
 }
 
 type PaymentOnDelivery struct {
-	ClientOrderID string        `json:"client_order_id"`
-	Cost          string        `json:"cost"`
-	Customer      Customer      `json:"customer"`
-	InvoiceLink   string        `json:"invoice_link"`
-	IsPaid        bool          `json:"is_paid"`
-	PaymentMethod PaymentMethod `json:"payment_method"`
-	PaymentRefID  string        `json:"payment_ref_id"`
+	ClientOrderID string `json:"client_order_id"`
+	Cost          string `json:"cost"`
+	InvoiceLink   string `json:"invoice_link"`
+	IsPaid        bool   `json:"is_paid"`
+	PaymentRefID  string `json:"payment_ref_id"`
+	PaymentOnDeliveryBase
 }
 
 type PaymentMethod string
@@ -252,21 +251,9 @@ const (
 	PaymentMethodCard PaymentMethod = "card"
 )
 
-func ToPaymentMethod(s string) (PaymentMethod, error) {
-	p := PaymentMethod(s)
-	switch p {
-	case PaymentMethodCash, PaymentMethodCard:
-		return p, nil
-	default:
-		return "", errors.New("invalid payment method")
-	}
-}
-
 type Customer struct {
-	Email    string `json:"email"`
 	FullName string `json:"full_name"`
-	Inn      string `json:"inn"`
-	Phone    string `json:"phone"`
+	CustomerBase
 }
 
 type VisitedAt struct {

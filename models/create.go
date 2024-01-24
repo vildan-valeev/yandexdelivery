@@ -1,6 +1,8 @@
 package models
 
-import "github.com/vildan-valeev/yandexlogistic/models/create"
+import (
+	"errors"
+)
 
 type CreateRequest struct {
 	AutoAccept          bool                `json:"auto_accept,omitempty"`
@@ -24,18 +26,43 @@ type CreateRequest struct {
 type RoutePointsCreate []RoutePointCreate
 
 type RoutePointCreate struct {
-	Address           Address                   `json:"address"`
-	Buyout            *create.Buyout            `json:"buyout,omitempty"`
-	Contact           Contact                   `json:"contact"`
-	ExternalOrderCost *ExternalOrderCost        `json:"external_order_cost,omitempty"`
-	ExternalOrderID   string                    `json:"external_order_id,omitempty"`
-	LeaveUnderDoor    bool                      `json:"leave_under_door,omitempty"`
-	MeetOutside       bool                      `json:"meet_outside,omitempty"`
-	NoDoorCall        bool                      `json:"no_door_call,omitempty"`
-	PaymentOnDelivery *create.PaymentOnDelivery `json:"payment_on_delivery,omitempty"`
-	PickupCode        string                    `json:"pickup_code,omitempty"`
-	PointID           int64                     `json:"point_id,omitempty"`
-	SkipConfirmation  bool                      `json:"skip_confirmation,omitempty"`
-	Type              string                    `json:"type,omitempty"`
-	VisitOrder        int64                     `json:"visit_order,omitempty"`
+	Address           Address            `json:"address"`
+	Buyout            *Buyout            `json:"buyout,omitempty"`
+	Contact           Contact            `json:"contact"`
+	ExternalOrderCost *ExternalOrderCost `json:"external_order_cost,omitempty"`
+	ExternalOrderID   string             `json:"external_order_id,omitempty"`
+	LeaveUnderDoor    bool               `json:"leave_under_door,omitempty"`
+	MeetOutside       bool               `json:"meet_outside,omitempty"`
+	NoDoorCall        bool               `json:"no_door_call,omitempty"`
+	PaymentOnDelivery *PaymentOnDelivery `json:"payment_on_delivery,omitempty"`
+	PickupCode        string             `json:"pickup_code,omitempty"`
+	PointID           int64              `json:"point_id,omitempty"`
+	SkipConfirmation  bool               `json:"skip_confirmation,omitempty"`
+	Type              string             `json:"type,omitempty"`
+	VisitOrder        int64              `json:"visit_order,omitempty"`
+}
+
+type Buyout struct {
+	PaymentMethod PaymentMethod `json:"payment_method,omitempty"`
+}
+
+type CustomerBase struct {
+	Email string `json:"email,omitempty"`
+	Inn   string `json:"inn,omitempty"`
+	Phone string `json:"phone,omitempty"`
+}
+
+type PaymentOnDeliveryBase struct {
+	Customer      Customer      `json:"customer,omitempty"`
+	PaymentMethod PaymentMethod `json:"payment_method,omitempty"`
+}
+
+func ToPaymentMethod(i string) (PaymentMethod, error) {
+	p := PaymentMethod(i)
+	switch p {
+	case PaymentMethodCash, PaymentMethodCard:
+		return p, nil
+	default:
+		return "", errors.New("invalid payment method")
+	}
 }
