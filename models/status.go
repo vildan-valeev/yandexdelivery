@@ -14,7 +14,7 @@ const (
 	StatusPerformerNotFound            Status = "performer_not_found"
 	StatusPickupArrived                Status = "pickup_arrived"
 	StatusReadyForPickupConfirmation   Status = "ready_for_pickup_confirmation"
-	StatusPickuped                     Status = "pickuped"
+	StatusPickUped                     Status = "pickuped"
 	StatusDeliveryArrived              Status = "delivery_arrived"
 	StatusReadyForDeliveryConfirmation Status = "ready_for_delivery_confirmation"
 	StatusPayWaiting                   Status = "pay_waiting"

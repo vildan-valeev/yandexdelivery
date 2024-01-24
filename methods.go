@@ -176,3 +176,13 @@ func (yc *YandexClient) BulkInfo(token string, payload models.BulkInfoRequest, o
 
 	return post[responses.APIResponseBulkInfo](token, yc.url, methodBulkInfo, addValues(nil, opts), jsn)
 }
+
+// Journal 7.2. Журнал изменений заказов  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsJournal.html
+func (yc *YandexClient) Journal(token string, payload models.JournalRequest, opts *options.JournalOptions) (res responses.APIResponseJournal, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseJournal{}, err
+	}
+
+	return post[responses.APIResponseJournal](token, yc.url, methodJournal, addValues(nil, opts), jsn)
+}
