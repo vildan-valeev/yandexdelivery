@@ -18,33 +18,33 @@ func (yc *YandexClient) DeliveryMethods(token string, payload models.DeliveryMet
 }
 
 // CheckPrice 2.1. Первичная оценка стоимости без создания заявки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2CheckPrice.html
-func (yc *YandexClient) CheckPrice(token string, payload models.CheckPriceRequest, opts *options.CheckPriceOptions) (res responses.APIResponseCheckPrice, err error) {
+func (yc *YandexClient) CheckPrice(token string, payload models.CheckPriceRequest) (res responses.APIResponseCheckPrice, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseCheckPrice{}, err
 	}
 
-	return post[responses.APIResponseCheckPrice](yc.debugMode, token, yc.url, methodCheckPrice, addValues(nil, opts), jsn)
+	return post[responses.APIResponseCheckPrice](yc.debugMode, token, yc.url, methodCheckPrice, nil, jsn)
 }
 
 // Tariffs 2.2. Получение тарифов, доступных в точке https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2Tariffs.html
-func (yc *YandexClient) Tariffs(token string, payload models.TariffsRequest, opts *options.TariffsOptions) (res responses.APIResponseTariffs, err error) {
+func (yc *YandexClient) Tariffs(token string, payload models.TariffsRequest) (res responses.APIResponseTariffs, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseTariffs{}, err
 	}
 
-	return post[responses.APIResponseTariffs](yc.debugMode, token, yc.url, methodTariffs, addValues(nil, opts), jsn)
+	return post[responses.APIResponseTariffs](yc.debugMode, token, yc.url, methodTariffs, nil, jsn)
 }
 
 // OffersCalculate 2.3. Получение вариантов доставки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2OfferCalculate.html
-func (yc *YandexClient) OffersCalculate(token string, payload models.OffersCalculateRequest, opts *options.OffersCalculateOptions) (res responses.APIResponseOffersCalculate, err error) {
+func (yc *YandexClient) OffersCalculate(token string, payload models.OffersCalculateRequest) (res responses.APIResponseOffersCalculate, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseOffersCalculate{}, err
 	}
 
-	return post[responses.APIResponseOffersCalculate](yc.debugMode, token, yc.url, methodOffersCalculate, addValues(nil, opts), jsn)
+	return post[responses.APIResponseOffersCalculate](yc.debugMode, token, yc.url, methodOffersCalculate, nil, jsn)
 }
 
 // Create 3.1. Создание заявки. https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsCreate.html
@@ -68,13 +68,13 @@ func (yc *YandexClient) Accept(token string, payload models.AcceptRequest, opts 
 }
 
 // Search 3.3. Поиск заявок https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsSearch.html
-func (yc *YandexClient) Search(token string, payload models.SearchRequest, opts *options.SearchOptions) (res responses.APIResponseSearch, err error) {
+func (yc *YandexClient) Search(token string, payload models.SearchRequest) (res responses.APIResponseSearch, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseSearch{}, err
 	}
 
-	return post[responses.APIResponseSearch](yc.debugMode, token, yc.url, methodSearch, addValues(nil, opts), jsn)
+	return post[responses.APIResponseSearch](yc.debugMode, token, yc.url, methodSearch, nil, jsn)
 }
 
 // Info 3.4. Получение информации по заявке https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsInfo.html
@@ -118,13 +118,13 @@ func (yc *YandexClient) Return(token string, payload models.ReturnRequest, opts 
 }
 
 // CourierPhone 5.1. Получение номера телефона курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2DriverVoiceForwarding.html
-func (yc *YandexClient) CourierPhone(token string, payload models.CourierPhoneRequest, opts *options.CourierPhoneOptions) (res responses.APIResponseCourierPhone, err error) {
+func (yc *YandexClient) CourierPhone(token string, payload models.CourierPhoneRequest) (res responses.APIResponseCourierPhone, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseCourierPhone{}, err
 	}
 
-	return post[responses.APIResponseCourierPhone](yc.debugMode, token, yc.url, methodCourierPhone, addValues(nil, opts), jsn)
+	return post[responses.APIResponseCourierPhone](yc.debugMode, token, yc.url, methodCourierPhone, nil, jsn)
 }
 
 // CourierPosition 5.2. Получение местоположения курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsPerformerPosition.html
@@ -168,23 +168,23 @@ func (yc *YandexClient) Document(token string, payload models.DocumentRequest, o
 }
 
 // BulkInfo 7.1. Получение информации по нескольким заявкам  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsBulkInfo.html
-func (yc *YandexClient) BulkInfo(token string, payload models.BulkInfoRequest, opts *options.BulkInfoOptions) (res responses.APIResponseBulkInfo, err error) {
+func (yc *YandexClient) BulkInfo(token string, payload models.BulkInfoRequest) (res responses.APIResponseBulkInfo, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseBulkInfo{}, err
 	}
 
-	return post[responses.APIResponseBulkInfo](yc.debugMode, token, yc.url, methodBulkInfo, addValues(nil, opts), jsn)
+	return post[responses.APIResponseBulkInfo](yc.debugMode, token, yc.url, methodBulkInfo, nil, jsn)
 }
 
 // Journal 7.2. Журнал изменений заказов  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsJournal.html
-func (yc *YandexClient) Journal(token string, payload models.JournalRequest, opts *options.JournalOptions) (res responses.APIResponseJournal, err error) {
+func (yc *YandexClient) Journal(token string, payload models.JournalRequest) (res responses.APIResponseJournal, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseJournal{}, err
 	}
 
-	return post[responses.APIResponseJournal](yc.debugMode, token, yc.url, methodJournal, addValues(nil, opts), jsn)
+	return post[responses.APIResponseJournal](yc.debugMode, token, yc.url, methodJournal, nil, jsn)
 }
 
 // PointsEta 7.3. Получение прогноза по времени прибытия на точки  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsPointsEta.html
@@ -228,13 +228,13 @@ func (yc *YandexClient) ApplyChangesResult(token string, payload models.ApplyCha
 }
 
 // RobotCheckAvailability 9.1 Запрос на проверку возможности доставки ровером https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
-func (yc *YandexClient) RobotCheckAvailability(token string, payload models.RobotCheckAvailabilityRequest, opts *options.RobotCheckAvailabilityOptions) (res responses.APIResponseRobotCheckAvailability, err error) {
+func (yc *YandexClient) RobotCheckAvailability(token string, payload models.RobotCheckAvailabilityRequest) (res responses.APIResponseRobotCheckAvailability, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseRobotCheckAvailability{}, err
 	}
 
-	return post[responses.APIResponseRobotCheckAvailability](yc.debugMode, token, yc.url, methodRobotCheckAvailability, addValues(nil, opts), jsn)
+	return post[responses.APIResponseRobotCheckAvailability](yc.debugMode, token, yc.url, methodRobotCheckAvailability, nil, jsn)
 }
 
 // RobotOpen 9.2 Запрос на открытие крышки ровера https://yandex.ru/dev/logistics/api/ref/robot/IntegrationV2ClaimsRobotOpenRequest.html
@@ -248,13 +248,13 @@ func (yc *YandexClient) RobotOpen(token string, payload models.RobotOpenRequest,
 }
 
 // PhotosPoint 10.1. Получение фотографий по точке https://yandex.ru/dev/logistics/api/ref/proof-of-delivery/IntegrationV2ClaimsPhotosByPoint.html
-func (yc *YandexClient) PhotosPoint(token string, payload models.PhotosPointRequest, opts *options.PhotosPointOptions) (res responses.APIResponsePhotosPoint, err error) {
+func (yc *YandexClient) PhotosPoint(token string, payload models.PhotosPointRequest) (res responses.APIResponsePhotosPoint, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponsePhotosPoint{}, err
 	}
 
-	return post[responses.APIResponsePhotosPoint](yc.debugMode, token, yc.url, methodPhotosPoint, addValues(nil, opts), jsn)
+	return post[responses.APIResponsePhotosPoint](yc.debugMode, token, yc.url, methodPhotosPoint, nil, jsn)
 }
 
 // ProofDelivery 10.1. Получение фотографий по точке https://yandex.ru/dev/logistics/api/ref/proof-of-delivery/IntegrationV2ClaimsProofOfDeliveryInfo.html
