@@ -1,20 +1,20 @@
-package yandexlogistic
+package yandexdelivery
 
 import (
 	"encoding/json"
-	"github.com/vildan-valeev/yandexlogistic/models"
-	"github.com/vildan-valeev/yandexlogistic/options"
-	"github.com/vildan-valeev/yandexlogistic/responses"
+	"github.com/vildan-valeev/yandexdelivery/models"
+	"github.com/vildan-valeev/yandexdelivery/options"
+	"github.com/vildan-valeev/yandexdelivery/responses"
 )
 
 // DeliveryMethods 1.1. Интервалы «Доставки в течение дня» https://yandex.ru/dev/logistics/api/ref/same-day/IntegrationV2DeliveryMethods.html
-func (yc *YandexClient) DeliveryMethods(token string, payload models.DeliveryMethodsRequest, opts *options.DeliveryMethodsOptions) (res responses.APIResponseDeliveryMethods, err error) {
+func (yc *YandexClient) DeliveryMethods(token string, payload models.DeliveryMethodsRequest) (res responses.APIResponseDeliveryMethods, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
 		return responses.APIResponseDeliveryMethods{}, err
 	}
 
-	return post[responses.APIResponseDeliveryMethods](token, yc.url, methodDeliveryMethods, addValues(nil, opts), jsn)
+	return post[responses.APIResponseDeliveryMethods](yc.debugMode, token, yc.url, methodDeliveryMethods, nil, jsn)
 }
 
 // CheckPrice 2.1. Первичная оценка стоимости без создания заявки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2CheckPrice.html
@@ -24,7 +24,7 @@ func (yc *YandexClient) CheckPrice(token string, payload models.CheckPriceReques
 		return responses.APIResponseCheckPrice{}, err
 	}
 
-	return post[responses.APIResponseCheckPrice](token, yc.url, methodCheckPrice, addValues(nil, opts), jsn)
+	return post[responses.APIResponseCheckPrice](yc.debugMode, token, yc.url, methodCheckPrice, addValues(nil, opts), jsn)
 }
 
 // Tariffs 2.2. Получение тарифов, доступных в точке https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2Tariffs.html
@@ -34,7 +34,7 @@ func (yc *YandexClient) Tariffs(token string, payload models.TariffsRequest, opt
 		return responses.APIResponseTariffs{}, err
 	}
 
-	return post[responses.APIResponseTariffs](token, yc.url, methodTariffs, addValues(nil, opts), jsn)
+	return post[responses.APIResponseTariffs](yc.debugMode, token, yc.url, methodTariffs, addValues(nil, opts), jsn)
 }
 
 // OffersCalculate 2.3. Получение вариантов доставки https://yandex.ru/dev/logistics/api/ref/estimate/IntegrationV2OfferCalculate.html
@@ -44,7 +44,7 @@ func (yc *YandexClient) OffersCalculate(token string, payload models.OffersCalcu
 		return responses.APIResponseOffersCalculate{}, err
 	}
 
-	return post[responses.APIResponseOffersCalculate](token, yc.url, methodOffersCalculate, addValues(nil, opts), jsn)
+	return post[responses.APIResponseOffersCalculate](yc.debugMode, token, yc.url, methodOffersCalculate, addValues(nil, opts), jsn)
 }
 
 // Create 3.1. Создание заявки. https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsCreate.html
@@ -54,7 +54,7 @@ func (yc *YandexClient) Create(token string, payload models.CreateRequest, opts 
 		return responses.APIResponseInfo{}, err
 	}
 
-	return post[responses.APIResponseInfo](token, yc.url, methodCreate, addValues(nil, opts), jsn)
+	return post[responses.APIResponseInfo](yc.debugMode, token, yc.url, methodCreate, addValues(nil, opts), jsn)
 }
 
 // Accept 3.2. Подтверждение заявки https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsAccept.html
@@ -64,7 +64,7 @@ func (yc *YandexClient) Accept(token string, payload models.AcceptRequest, opts 
 		return responses.APIResponseAccept{}, err
 	}
 
-	return post[responses.APIResponseAccept](token, yc.url, methodAccept, addValues(nil, opts), jsn)
+	return post[responses.APIResponseAccept](yc.debugMode, token, yc.url, methodAccept, addValues(nil, opts), jsn)
 }
 
 // Search 3.3. Поиск заявок https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsSearch.html
@@ -74,7 +74,7 @@ func (yc *YandexClient) Search(token string, payload models.SearchRequest, opts 
 		return responses.APIResponseSearch{}, err
 	}
 
-	return post[responses.APIResponseSearch](token, yc.url, methodSearch, addValues(nil, opts), jsn)
+	return post[responses.APIResponseSearch](yc.debugMode, token, yc.url, methodSearch, addValues(nil, opts), jsn)
 }
 
 // Info 3.4. Получение информации по заявке https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsInfo.html
@@ -84,7 +84,7 @@ func (yc *YandexClient) Info(token string, payload models.InfoRequest, opts *opt
 		return responses.APIResponseInfo{}, err
 	}
 
-	return post[responses.APIResponseInfo](token, yc.url, methodInfo, addValues(nil, opts), jsn)
+	return post[responses.APIResponseInfo](yc.debugMode, token, yc.url, methodInfo, addValues(nil, opts), jsn)
 }
 
 // CancelInfo 4.1. Получение признака отмены https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsCancelInfo.html
@@ -94,7 +94,7 @@ func (yc *YandexClient) CancelInfo(token string, payload models.CancelInfoReques
 		return responses.APIResponseCancelInfo{}, err
 	}
 
-	return post[responses.APIResponseCancelInfo](token, yc.url, methodCancelInfo, addValues(nil, opts), jsn)
+	return post[responses.APIResponseCancelInfo](yc.debugMode, token, yc.url, methodCancelInfo, addValues(nil, opts), jsn)
 }
 
 // Cancel 4.2. Отмена заявки https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsCancel.html
@@ -104,7 +104,7 @@ func (yc *YandexClient) Cancel(token string, payload models.CancelRequest, opts 
 		return responses.APIResponseCancel{}, err
 	}
 
-	return post[responses.APIResponseCancel](token, yc.url, methodCancel, addValues(nil, opts), jsn)
+	return post[responses.APIResponseCancel](yc.debugMode, token, yc.url, methodCancel, addValues(nil, opts), jsn)
 }
 
 // Return 4.3. Пропуск точки в заказе с мультиточками. https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsReturn.html
@@ -114,7 +114,7 @@ func (yc *YandexClient) Return(token string, payload models.ReturnRequest, opts 
 		return responses.APIResponseReturn{}, err
 	}
 
-	return post[responses.APIResponseReturn](token, yc.url, methodReturn, addValues(nil, opts), jsn)
+	return post[responses.APIResponseReturn](yc.debugMode, token, yc.url, methodReturn, addValues(nil, opts), jsn)
 }
 
 // CourierPhone 5.1. Получение номера телефона курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2DriverVoiceForwarding.html
@@ -124,7 +124,7 @@ func (yc *YandexClient) CourierPhone(token string, payload models.CourierPhoneRe
 		return responses.APIResponseCourierPhone{}, err
 	}
 
-	return post[responses.APIResponseCourierPhone](token, yc.url, methodCourierPhone, addValues(nil, opts), jsn)
+	return post[responses.APIResponseCourierPhone](yc.debugMode, token, yc.url, methodCourierPhone, addValues(nil, opts), jsn)
 }
 
 // CourierPosition 5.2. Получение местоположения курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsPerformerPosition.html
@@ -134,7 +134,7 @@ func (yc *YandexClient) CourierPosition(token string, payload models.CourierPosi
 		return responses.APIResponseCourierPosition{}, err
 	}
 
-	return get[responses.APIResponseCourierPosition](token, yc.url, methodCourierPosition, addValues(nil, opts), jsn)
+	return get[responses.APIResponseCourierPosition](yc.debugMode, token, yc.url, methodCourierPosition, addValues(nil, opts), jsn)
 }
 
 // TrackingLinks 5.3. Получение ссылок для отслеживания курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsTrackingLinks.html
@@ -144,7 +144,7 @@ func (yc *YandexClient) TrackingLinks(token string, payload models.TrackingLinks
 		return responses.APIResponseTrackingLinks{}, err
 	}
 
-	return get[responses.APIResponseTrackingLinks](token, yc.url, methodTrackingLinks, addValues(nil, opts), jsn)
+	return get[responses.APIResponseTrackingLinks](yc.debugMode, token, yc.url, methodTrackingLinks, addValues(nil, opts), jsn)
 }
 
 // ConfirmationCode 6.1. Получение кода подтверждения https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsConfirmationCode.html
@@ -154,7 +154,7 @@ func (yc *YandexClient) ConfirmationCode(token string, payload models.Confirmati
 		return responses.APIResponseConfirmationCode{}, err
 	}
 
-	return post[responses.APIResponseConfirmationCode](token, yc.url, methodConfirmationCode, addValues(nil, opts), jsn)
+	return post[responses.APIResponseConfirmationCode](yc.debugMode, token, yc.url, methodConfirmationCode, addValues(nil, opts), jsn)
 }
 
 // Document 6.2. Получение акта приёма-передачи https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsDocument.html
@@ -164,7 +164,7 @@ func (yc *YandexClient) Document(token string, payload models.DocumentRequest, o
 		return responses.APIResponseDocument{}, err
 	}
 	// TODO: получение файла - переделать запрос!!!!!
-	return getFile[responses.APIResponseDocument](token, yc.url, methodDocument, addValues(nil, opts), jsn)
+	return getFile[responses.APIResponseDocument](yc.debugMode, token, yc.url, methodDocument, addValues(nil, opts), jsn)
 }
 
 // BulkInfo 7.1. Получение информации по нескольким заявкам  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsBulkInfo.html
@@ -174,7 +174,7 @@ func (yc *YandexClient) BulkInfo(token string, payload models.BulkInfoRequest, o
 		return responses.APIResponseBulkInfo{}, err
 	}
 
-	return post[responses.APIResponseBulkInfo](token, yc.url, methodBulkInfo, addValues(nil, opts), jsn)
+	return post[responses.APIResponseBulkInfo](yc.debugMode, token, yc.url, methodBulkInfo, addValues(nil, opts), jsn)
 }
 
 // Journal 7.2. Журнал изменений заказов  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsJournal.html
@@ -184,7 +184,7 @@ func (yc *YandexClient) Journal(token string, payload models.JournalRequest, opt
 		return responses.APIResponseJournal{}, err
 	}
 
-	return post[responses.APIResponseJournal](token, yc.url, methodJournal, addValues(nil, opts), jsn)
+	return post[responses.APIResponseJournal](yc.debugMode, token, yc.url, methodJournal, addValues(nil, opts), jsn)
 }
 
 // PointsEta 7.3. Получение прогноза по времени прибытия на точки  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsPointsEta.html
@@ -194,7 +194,7 @@ func (yc *YandexClient) PointsEta(token string, payload models.PointsEtaRequest,
 		return responses.APIResponsePointsEta{}, err
 	}
 
-	return post[responses.APIResponsePointsEta](token, yc.url, methodPointsEta, addValues(nil, opts), jsn)
+	return post[responses.APIResponsePointsEta](yc.debugMode, token, yc.url, methodPointsEta, addValues(nil, opts), jsn)
 }
 
 // Edit 8.1. Редактирование заявки до её подтверждения https://yandex.ru/dev/logistics/api/ref/claim-edit/IntegrationV2ClaimsEdit.html
@@ -204,7 +204,7 @@ func (yc *YandexClient) Edit(token string, payload models.EditRequest, opts *opt
 		return responses.APIResponseEdit{}, err
 	}
 
-	return post[responses.APIResponseEdit](token, yc.url, methodEdit, addValues(nil, opts), jsn)
+	return post[responses.APIResponseEdit](yc.debugMode, token, yc.url, methodEdit, addValues(nil, opts), jsn)
 }
 
 // ApplyChanges 8.2. Частичное редактирование заявки после ее подтверждения https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesRequest.html
@@ -214,7 +214,7 @@ func (yc *YandexClient) ApplyChanges(token string, payload models.ApplyChangesRe
 		return responses.APIResponseApplyChanges{}, err
 	}
 
-	return post[responses.APIResponseApplyChanges](token, yc.url, methodApplyChanges, addValues(nil, opts), jsn)
+	return post[responses.APIResponseApplyChanges](yc.debugMode, token, yc.url, methodApplyChanges, addValues(nil, opts), jsn)
 }
 
 // ApplyChangesResult 8.3. Получить результат применения изменений https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
@@ -224,7 +224,7 @@ func (yc *YandexClient) ApplyChangesResult(token string, payload models.ApplyCha
 		return responses.APIResponseApplyChangesResult{}, err
 	}
 
-	return post[responses.APIResponseApplyChangesResult](token, yc.url, methodApplyChangesResult, addValues(nil, opts), jsn)
+	return post[responses.APIResponseApplyChangesResult](yc.debugMode, token, yc.url, methodApplyChangesResult, addValues(nil, opts), jsn)
 }
 
 // RobotCheckAvailability 9.1 Запрос на проверку возможности доставки ровером https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
@@ -234,7 +234,7 @@ func (yc *YandexClient) RobotCheckAvailability(token string, payload models.Robo
 		return responses.APIResponseRobotCheckAvailability{}, err
 	}
 
-	return post[responses.APIResponseRobotCheckAvailability](token, yc.url, methodRobotCheckAvailability, addValues(nil, opts), jsn)
+	return post[responses.APIResponseRobotCheckAvailability](yc.debugMode, token, yc.url, methodRobotCheckAvailability, addValues(nil, opts), jsn)
 }
 
 // RobotOpen 9.2 Запрос на открытие крышки ровера https://yandex.ru/dev/logistics/api/ref/robot/IntegrationV2ClaimsRobotOpenRequest.html
@@ -244,7 +244,7 @@ func (yc *YandexClient) RobotOpen(token string, payload models.RobotOpenRequest,
 		return responses.APIResponseRobotOpen{}, err
 	}
 
-	return post[responses.APIResponseRobotOpen](token, yc.url, methodRobotOpen, addValues(nil, opts), jsn)
+	return post[responses.APIResponseRobotOpen](yc.debugMode, token, yc.url, methodRobotOpen, addValues(nil, opts), jsn)
 }
 
 // PhotosPoint 10.1. Получение фотографий по точке https://yandex.ru/dev/logistics/api/ref/proof-of-delivery/IntegrationV2ClaimsPhotosByPoint.html
@@ -254,7 +254,7 @@ func (yc *YandexClient) PhotosPoint(token string, payload models.PhotosPointRequ
 		return responses.APIResponsePhotosPoint{}, err
 	}
 
-	return post[responses.APIResponsePhotosPoint](token, yc.url, methodPhotosPoint, addValues(nil, opts), jsn)
+	return post[responses.APIResponsePhotosPoint](yc.debugMode, token, yc.url, methodPhotosPoint, addValues(nil, opts), jsn)
 }
 
 // ProofDelivery 10.1. Получение фотографий по точке https://yandex.ru/dev/logistics/api/ref/proof-of-delivery/IntegrationV2ClaimsProofOfDeliveryInfo.html
@@ -264,5 +264,5 @@ func (yc *YandexClient) ProofDelivery(token string, payload models.ProofDelivery
 		return responses.APIResponseProofDelivery{}, err
 	}
 
-	return post[responses.APIResponseProofDelivery](token, yc.url, methodProofDelivery, addValues(nil, opts), jsn)
+	return post[responses.APIResponseProofDelivery](yc.debugMode, token, yc.url, methodProofDelivery, addValues(nil, opts), jsn)
 }

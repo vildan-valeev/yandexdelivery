@@ -1,6 +1,6 @@
 package responses
 
-import "github.com/vildan-valeev/yandexlogistic/models"
+import "github.com/vildan-valeev/yandexdelivery/models"
 
 type APIResponseAccept struct {
 	models.AcceptResponse

@@ -1,4 +1,4 @@
-package yandexlogistic
+package yandexdelivery
 
 import (
 	"encoding/json"

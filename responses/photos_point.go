@@ -1,6 +1,6 @@
 package responses
 
-import "github.com/vildan-valeev/yandexlogistic/models"
+import "github.com/vildan-valeev/yandexdelivery/models"
 
 type APIResponsePhotosPoint struct {
 	models.PhotosPointResponse

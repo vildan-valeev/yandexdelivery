@@ -1,34 +1,34 @@
-package yandexlogistic
+package yandexdelivery
 
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/vildan-valeev/yandexlogistic/responses"
+	"github.com/vildan-valeev/yandexdelivery/responses"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 )
 
-func post[T responses.APIResponse](token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
+func post[T responses.APIResponse](debugMode bool, token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
 	u, err := joinURL(base, endpoint, vals)
 	if err != nil {
 		return res, err
 	}
-	fmt.Println("YANDEX BODY REQUEST", string(payload))
+
+	if debugMode {
+		debug("YANDEX BODY REQUEST", payload)
+	}
+
 	statusCode, cnt, err := sendRequest(http.MethodPost, token, u, payload)
 	if err != nil {
 		return res, err
 	}
 
-	// Debug
-	dst := &bytes.Buffer{}
-	if err = json.Indent(dst, cnt, "", "  "); err != nil {
-		log.Println(err)
+	if debugMode {
+		debug("YANDEX BODY RESPONSE", cnt)
 	}
-	fmt.Println("YANDEX BODY RESPONSE", dst.String())
-	// End Debug
 
 	if err = json.Unmarshal(cnt, &res); err != nil {
 		return
@@ -38,24 +38,24 @@ func post[T responses.APIResponse](token, base, endpoint string, vals url.Values
 	return
 }
 
-func get[T responses.APIResponse](token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
+func get[T responses.APIResponse](debugMode bool, token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
 	u, err := joinURL(base, endpoint, vals)
 	if err != nil {
 		return res, err
 	}
-	fmt.Println("YANDEX BODY REQUEST", string(payload))
+
+	if debugMode {
+		debug("YANDEX BODY REQUEST", payload)
+	}
+
 	statusCode, cnt, err := sendRequest(http.MethodGet, token, u, payload)
 	if err != nil {
 		return res, err
 	}
 
-	// Debug
-	dst := &bytes.Buffer{}
-	if err = json.Indent(dst, cnt, "", "  "); err != nil {
-		log.Println(err)
+	if debugMode {
+		debug("YANDEX BODY RESPONSE", cnt)
 	}
-	fmt.Println("YANDEX BODY RESPONSE", dst.String())
-	// End Debug
 
 	if err = json.Unmarshal(cnt, &res); err != nil {
 		return
@@ -65,24 +65,24 @@ func get[T responses.APIResponse](token, base, endpoint string, vals url.Values,
 	return
 }
 
-func getFile[T responses.APIResponse](token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
+func getFile[T responses.APIResponse](debugMode bool, token, base, endpoint string, vals url.Values, payload []byte) (res T, err error) {
 	u, err := joinURL(base, endpoint, vals)
 	if err != nil {
 		return res, err
 	}
-	fmt.Println("YANDEX BODY REQUEST", string(payload))
+
+	if debugMode {
+		debug("YANDEX BODY REQUEST", payload)
+	}
+
 	statusCode, cnt, err := sendRequest(http.MethodGet, token, u, payload)
 	if err != nil {
 		return res, err
 	}
 
-	// Debug
-	dst := &bytes.Buffer{}
-	if err = json.Indent(dst, cnt, "", "  "); err != nil {
-		log.Println(err)
+	if debugMode {
+		debug("YANDEX BODY RESPONSE", cnt)
 	}
-	fmt.Println("YANDEX BODY RESPONSE", dst.String())
-	// End Debug
 
 	if err = json.Unmarshal(cnt, &res); err != nil {
 		return
@@ -117,6 +117,7 @@ func sendRequest(method, token, url string, payload []byte) (int, []byte, error)
 
 	req.Header.Add("Authorization", "Bearer "+token)
 	req.Header.Add("Accept-Language", "ru")
+	req.Header.Add("Content-Type", "application/json")
 
 	var client = new(http.Client)
 	res, err := client.Do(req)
@@ -146,4 +147,12 @@ func joinURL(base, endpoint string, vals url.Values) (addr string, err error) {
 	}
 
 	return
+}
+
+func debug(msg string, content []byte) {
+	dst := &bytes.Buffer{}
+	if err := json.Indent(dst, content, "", "  "); err != nil {
+		log.Println(err)
+	}
+	log.Printf("%s:\n%s\n", msg, dst.String())
 }

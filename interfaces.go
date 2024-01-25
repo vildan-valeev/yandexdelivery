@@ -1,13 +1,13 @@
-package yandexlogistic
+package yandexdelivery
 
 import (
-	"github.com/vildan-valeev/yandexlogistic/models"
-	"github.com/vildan-valeev/yandexlogistic/options"
-	"github.com/vildan-valeev/yandexlogistic/responses"
+	"github.com/vildan-valeev/yandexdelivery/models"
+	"github.com/vildan-valeev/yandexdelivery/options"
+	"github.com/vildan-valeev/yandexdelivery/responses"
 )
 
-type YandexLogistics interface {
-	DeliveryMethods(token string, payload models.DeliveryMethodsRequest, opts *options.DeliveryMethodsOptions) (res responses.APIResponseDeliveryMethods, err error)
+type YandexDelivery interface {
+	DeliveryMethods(token string, payload models.DeliveryMethodsRequest) (res responses.APIResponseDeliveryMethods, err error)
 
 	CheckPrice(token string, payload models.CheckPriceRequest, opts *options.CheckPriceOptions) (res responses.APIResponseCheckPrice, err error)
 	Tariffs(token string, payload models.TariffsRequest, opts *options.TariffsOptions) (res responses.APIResponseTariffs, err error)
