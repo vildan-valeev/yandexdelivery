@@ -216,3 +216,33 @@ func (yc *YandexClient) ApplyChanges(token string, payload models.ApplyChangesRe
 
 	return post[responses.APIResponseApplyChanges](token, yc.url, methodApplyChanges, addValues(nil, opts), jsn)
 }
+
+// ApplyChangesResult Edit 8.3. Получить результат применения изменений https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
+func (yc *YandexClient) ApplyChangesResult(token string, payload models.ApplyChangesResultRequest, opts *options.ApplyChangesResultOptions) (res responses.APIResponseApplyChangesResult, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseApplyChangesResult{}, err
+	}
+
+	return post[responses.APIResponseApplyChangesResult](token, yc.url, methodApplyChangesResult, addValues(nil, opts), jsn)
+}
+
+// RobotCheckAvailability Edit 9.1 Запрос на проверку возможности доставки ровером https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
+func (yc *YandexClient) RobotCheckAvailability(token string, payload models.RobotCheckAvailabilityRequest, opts *options.RobotCheckAvailabilityOptions) (res responses.APIResponseRobotCheckAvailability, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseRobotCheckAvailability{}, err
+	}
+
+	return post[responses.APIResponseRobotCheckAvailability](token, yc.url, methodRobotCheckAvailability, addValues(nil, opts), jsn)
+}
+
+// RobotOpen Edit 9.2 Запрос на открытие крышки ровера https://yandex.ru/dev/logistics/api/ref/robot/IntegrationV2ClaimsRobotOpenRequest.html
+func (yc *YandexClient) RobotOpen(token string, payload models.RobotOpenRequest, opts *options.RobotOpenOptions) (res responses.APIResponseRobotOpen, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseRobotOpen{}, err
+	}
+
+	return post[responses.APIResponseRobotOpen](token, yc.url, methodRobotOpen, addValues(nil, opts), jsn)
+}
