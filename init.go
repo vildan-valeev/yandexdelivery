@@ -27,6 +27,7 @@ const (
 	methodJournal          = "claims/journal"
 	methodPointsEta        = "claims/points-eta"
 	methodEdit             = "claims/edit"
+	methodApplyChanges     = "claims/apply-changes/request"
 )
 
 type YandexClient struct {

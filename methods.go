@@ -206,3 +206,13 @@ func (yc *YandexClient) Edit(token string, payload models.EditRequest, opts *opt
 
 	return post[responses.APIResponseEdit](token, yc.url, methodEdit, addValues(nil, opts), jsn)
 }
+
+// ApplyChanges Edit 8.2. Частичное редактирование заявки после ее подтверждения https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesRequest.html
+func (yc *YandexClient) ApplyChanges(token string, payload models.ApplyChangesRequest, opts *options.ApplyChangesOptions) (res responses.APIResponseApplyChanges, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseApplyChanges{}, err
+	}
+
+	return post[responses.APIResponseApplyChanges](token, yc.url, methodApplyChanges, addValues(nil, opts), jsn)
+}
