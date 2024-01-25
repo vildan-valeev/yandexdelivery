@@ -6,7 +6,8 @@ import (
 )
 
 const (
-	methodBase                   = "b2b/cargo/integration/v2/"
+	methodBase = "b2b/cargo/integration/v2/"
+
 	methodDeliveryMethods        = "delivery-methods"
 	methodCheckPrice             = "check-price"
 	methodTariffs                = "tariffs"
@@ -31,6 +32,8 @@ const (
 	methodApplyChangesResult     = "claims/apply-changes/result"
 	methodRobotCheckAvailability = "claims/robot/check-availability"
 	methodRobotOpen              = "claims/robot/open-request"
+	methodPhotosPoint            = "claims/photos_by_point"
+	methodProofDelivery          = "claims/proof-of-delivery/info"
 )
 
 type YandexClient struct {

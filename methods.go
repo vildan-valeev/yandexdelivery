@@ -207,7 +207,7 @@ func (yc *YandexClient) Edit(token string, payload models.EditRequest, opts *opt
 	return post[responses.APIResponseEdit](token, yc.url, methodEdit, addValues(nil, opts), jsn)
 }
 
-// ApplyChanges Edit 8.2. Частичное редактирование заявки после ее подтверждения https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesRequest.html
+// ApplyChanges 8.2. Частичное редактирование заявки после ее подтверждения https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesRequest.html
 func (yc *YandexClient) ApplyChanges(token string, payload models.ApplyChangesRequest, opts *options.ApplyChangesOptions) (res responses.APIResponseApplyChanges, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
@@ -217,7 +217,7 @@ func (yc *YandexClient) ApplyChanges(token string, payload models.ApplyChangesRe
 	return post[responses.APIResponseApplyChanges](token, yc.url, methodApplyChanges, addValues(nil, opts), jsn)
 }
 
-// ApplyChangesResult Edit 8.3. Получить результат применения изменений https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
+// ApplyChangesResult 8.3. Получить результат применения изменений https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
 func (yc *YandexClient) ApplyChangesResult(token string, payload models.ApplyChangesResultRequest, opts *options.ApplyChangesResultOptions) (res responses.APIResponseApplyChangesResult, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
@@ -227,7 +227,7 @@ func (yc *YandexClient) ApplyChangesResult(token string, payload models.ApplyCha
 	return post[responses.APIResponseApplyChangesResult](token, yc.url, methodApplyChangesResult, addValues(nil, opts), jsn)
 }
 
-// RobotCheckAvailability Edit 9.1 Запрос на проверку возможности доставки ровером https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
+// RobotCheckAvailability 9.1 Запрос на проверку возможности доставки ровером https://yandex.ru/dev/logistics/api/ref/claim-edit/ClaimsApplyChangesResult.html
 func (yc *YandexClient) RobotCheckAvailability(token string, payload models.RobotCheckAvailabilityRequest, opts *options.RobotCheckAvailabilityOptions) (res responses.APIResponseRobotCheckAvailability, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
@@ -237,7 +237,7 @@ func (yc *YandexClient) RobotCheckAvailability(token string, payload models.Robo
 	return post[responses.APIResponseRobotCheckAvailability](token, yc.url, methodRobotCheckAvailability, addValues(nil, opts), jsn)
 }
 
-// RobotOpen Edit 9.2 Запрос на открытие крышки ровера https://yandex.ru/dev/logistics/api/ref/robot/IntegrationV2ClaimsRobotOpenRequest.html
+// RobotOpen 9.2 Запрос на открытие крышки ровера https://yandex.ru/dev/logistics/api/ref/robot/IntegrationV2ClaimsRobotOpenRequest.html
 func (yc *YandexClient) RobotOpen(token string, payload models.RobotOpenRequest, opts *options.RobotOpenOptions) (res responses.APIResponseRobotOpen, err error) {
 	jsn, err := json.Marshal(payload)
 	if err != nil {
@@ -245,4 +245,24 @@ func (yc *YandexClient) RobotOpen(token string, payload models.RobotOpenRequest,
 	}
 
 	return post[responses.APIResponseRobotOpen](token, yc.url, methodRobotOpen, addValues(nil, opts), jsn)
+}
+
+// PhotosPoint 10.1. Получение фотографий по точке https://yandex.ru/dev/logistics/api/ref/proof-of-delivery/IntegrationV2ClaimsPhotosByPoint.html
+func (yc *YandexClient) PhotosPoint(token string, payload models.PhotosPointRequest, opts *options.PhotosPointOptions) (res responses.APIResponsePhotosPoint, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponsePhotosPoint{}, err
+	}
+
+	return post[responses.APIResponsePhotosPoint](token, yc.url, methodPhotosPoint, addValues(nil, opts), jsn)
+}
+
+// ProofDelivery 10.1. Получение фотографий по точке https://yandex.ru/dev/logistics/api/ref/proof-of-delivery/IntegrationV2ClaimsProofOfDeliveryInfo.html
+func (yc *YandexClient) ProofDelivery(token string, payload models.ProofDeliveryRequest, opts *options.ProofDeliveryOptions) (res responses.APIResponseProofDelivery, err error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseProofDelivery{}, err
+	}
+
+	return post[responses.APIResponseProofDelivery](token, yc.url, methodProofDelivery, addValues(nil, opts), jsn)
 }
