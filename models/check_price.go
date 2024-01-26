@@ -36,6 +36,6 @@ type CheckPriceRequirement struct {
 	CargoOptions []string    `json:"cargo_options"`
 	CargoType    string      `json:"cargo_type"`
 	ProCourier   bool        `json:"pro_courier"`
-	SameDayData  SameDayData `json:"same_day_data"`
+	SameDayData  SameDayData `json:"same_day_data,omitempty"`
 	TaxiClass    string      `json:"taxi_class"`
 }

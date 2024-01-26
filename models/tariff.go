@@ -1,8 +1,8 @@
 package models
 
 type TariffsRequest struct {
-	FullName   string  `json:"fullname"`
-	StartPoint []int64 `json:"start_point"`
+	FullName   string    `json:"fullname"`
+	StartPoint []float64 `json:"start_point"`
 }
 
 type TariffsResponse struct {
