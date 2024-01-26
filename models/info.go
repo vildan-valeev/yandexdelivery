@@ -4,8 +4,8 @@ import (
 	"errors"
 )
 
-type InfoRequest struct {
-}
+//type InfoRequest struct {
+//}
 
 type Claim struct {
 	AvailableCancelState string             `json:"available_cancel_state"`

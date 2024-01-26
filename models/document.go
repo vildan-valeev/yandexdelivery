@@ -1,7 +1,7 @@
 package models
 
-type DocumentRequest struct {
-}
+//type DocumentRequest struct {
+//}
 
 type DocumentResponse struct {
 }

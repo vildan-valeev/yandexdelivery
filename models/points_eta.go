@@ -1,7 +1,7 @@
 package models
 
-type PointsEtaRequest struct {
-}
+//type PointsEtaRequest struct {
+//}
 
 type PointsEtaResponse struct {
 	ID                string    `json:"id"`

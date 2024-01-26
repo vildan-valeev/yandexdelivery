@@ -78,23 +78,13 @@ func (yc *YandexClient) Search(token string, payload models.SearchRequest) (res 
 }
 
 // Info 3.4. Получение информации по заявке https://yandex.ru/dev/logistics/api/ref/basic/IntegrationV2ClaimsInfo.html
-func (yc *YandexClient) Info(token string, payload models.InfoRequest, opts *options.InfoOptions) (res responses.APIResponseInfo, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponseInfo{}, err
-	}
-
-	return post[responses.APIResponseInfo](yc.debugMode, token, yc.url, methodInfo, addValues(nil, opts), jsn)
+func (yc *YandexClient) Info(token string, opts *options.InfoOptions) (res responses.APIResponseInfo, err error) {
+	return post[responses.APIResponseInfo](yc.debugMode, token, yc.url, methodInfo, addValues(nil, opts), nil)
 }
 
 // CancelInfo 4.1. Получение признака отмены https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsCancelInfo.html
-func (yc *YandexClient) CancelInfo(token string, payload models.CancelInfoRequest, opts *options.CancelInfoOptions) (res responses.APIResponseCancelInfo, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponseCancelInfo{}, err
-	}
-
-	return post[responses.APIResponseCancelInfo](yc.debugMode, token, yc.url, methodCancelInfo, addValues(nil, opts), jsn)
+func (yc *YandexClient) CancelInfo(token string, opts *options.CancelInfoOptions) (res responses.APIResponseCancelInfo, err error) {
+	return post[responses.APIResponseCancelInfo](yc.debugMode, token, yc.url, methodCancelInfo, addValues(nil, opts), nil)
 }
 
 // Cancel 4.2. Отмена заявки https://yandex.ru/dev/logistics/api/ref/cancel-and-skip-points/IntegrationV2ClaimsCancel.html
@@ -128,43 +118,24 @@ func (yc *YandexClient) CourierPhone(token string, payload models.CourierPhoneRe
 }
 
 // CourierPosition 5.2. Получение местоположения курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsPerformerPosition.html
-func (yc *YandexClient) CourierPosition(token string, payload models.CourierPositionRequest, opts *options.CourierPositionOptions) (res responses.APIResponseCourierPosition, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponseCourierPosition{}, err
-	}
-
-	return get[responses.APIResponseCourierPosition](yc.debugMode, token, yc.url, methodCourierPosition, addValues(nil, opts), jsn)
+func (yc *YandexClient) CourierPosition(token string, opts *options.CourierPositionOptions) (res responses.APIResponseCourierPosition, err error) {
+	return get[responses.APIResponseCourierPosition](yc.debugMode, token, yc.url, methodCourierPosition, addValues(nil, opts), nil)
 }
 
 // TrackingLinks 5.3. Получение ссылок для отслеживания курьера https://yandex.ru/dev/logistics/api/ref/performer-info/IntegrationV2ClaimsTrackingLinks.html
-func (yc *YandexClient) TrackingLinks(token string, payload models.TrackingLinksRequest, opts *options.TrackingLinksOptions) (res responses.APIResponseTrackingLinks, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponseTrackingLinks{}, err
-	}
-
-	return get[responses.APIResponseTrackingLinks](yc.debugMode, token, yc.url, methodTrackingLinks, addValues(nil, opts), jsn)
+func (yc *YandexClient) TrackingLinks(token string, opts *options.TrackingLinksOptions) (res responses.APIResponseTrackingLinks, err error) {
+	return get[responses.APIResponseTrackingLinks](yc.debugMode, token, yc.url, methodTrackingLinks, addValues(nil, opts), nil)
 }
 
 // ConfirmationCode 6.1. Получение кода подтверждения https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsConfirmationCode.html
-func (yc *YandexClient) ConfirmationCode(token string, payload models.ConfirmationCodeRequest, opts *options.ConfirmationCodeOptions) (res responses.APIResponseConfirmationCode, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponseConfirmationCode{}, err
-	}
-
-	return post[responses.APIResponseConfirmationCode](yc.debugMode, token, yc.url, methodConfirmationCode, addValues(nil, opts), jsn)
+func (yc *YandexClient) ConfirmationCode(token string, opts *options.ConfirmationCodeOptions) (res responses.APIResponseConfirmationCode, err error) {
+	return post[responses.APIResponseConfirmationCode](yc.debugMode, token, yc.url, methodConfirmationCode, addValues(nil, opts), nil)
 }
 
 // Document 6.2. Получение акта приёма-передачи https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsDocument.html
-func (yc *YandexClient) Document(token string, payload models.DocumentRequest, opts *options.DocumentOptions) (res responses.APIResponseDocument, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponseDocument{}, err
-	}
+func (yc *YandexClient) Document(token string, opts *options.DocumentOptions) (res responses.APIResponseDocument, err error) {
 	// TODO: получение файла - переделать запрос!!!!!
-	return getFile[responses.APIResponseDocument](yc.debugMode, token, yc.url, methodDocument, addValues(nil, opts), jsn)
+	return getFile[responses.APIResponseDocument](yc.debugMode, token, yc.url, methodDocument, addValues(nil, opts), nil)
 }
 
 // BulkInfo 7.1. Получение информации по нескольким заявкам  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsBulkInfo.html
@@ -188,13 +159,8 @@ func (yc *YandexClient) Journal(token string, payload models.JournalRequest) (re
 }
 
 // PointsEta 7.3. Получение прогноза по времени прибытия на точки  https://yandex.ru/dev/logistics/api/ref/claim-info/IntegrationV2ClaimsPointsEta.html
-func (yc *YandexClient) PointsEta(token string, payload models.PointsEtaRequest, opts *options.PointsEtaOptions) (res responses.APIResponsePointsEta, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponsePointsEta{}, err
-	}
-
-	return post[responses.APIResponsePointsEta](yc.debugMode, token, yc.url, methodPointsEta, addValues(nil, opts), jsn)
+func (yc *YandexClient) PointsEta(token string, opts *options.PointsEtaOptions) (res responses.APIResponsePointsEta, err error) {
+	return post[responses.APIResponsePointsEta](yc.debugMode, token, yc.url, methodPointsEta, addValues(nil, opts), nil)
 }
 
 // Edit 8.1. Редактирование заявки до её подтверждения https://yandex.ru/dev/logistics/api/ref/claim-edit/IntegrationV2ClaimsEdit.html
@@ -258,11 +224,6 @@ func (yc *YandexClient) PhotosPoint(token string, payload models.PhotosPointRequ
 }
 
 // ProofDelivery 10.1. Получение фотографий по точке https://yandex.ru/dev/logistics/api/ref/proof-of-delivery/IntegrationV2ClaimsProofOfDeliveryInfo.html
-func (yc *YandexClient) ProofDelivery(token string, payload models.ProofDeliveryRequest, opts *options.ProofDeliveryOptions) (res responses.APIResponseProofDelivery, err error) {
-	jsn, err := json.Marshal(payload)
-	if err != nil {
-		return responses.APIResponseProofDelivery{}, err
-	}
-
-	return post[responses.APIResponseProofDelivery](yc.debugMode, token, yc.url, methodProofDelivery, addValues(nil, opts), jsn)
+func (yc *YandexClient) ProofDelivery(token string, opts *options.ProofDeliveryOptions) (res responses.APIResponseProofDelivery, err error) {
+	return post[responses.APIResponseProofDelivery](yc.debugMode, token, yc.url, methodProofDelivery, addValues(nil, opts), nil)
 }

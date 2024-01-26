@@ -1,7 +1,7 @@
 package models
 
-type CancelInfoRequest struct {
-}
+//type CancelInfoRequest struct {
+//}
 
 type CancelInfoResponse struct {
 	CancelState  string `json:"cancel_state"`

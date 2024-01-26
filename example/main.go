@@ -12,7 +12,7 @@ func main() {
 }
 
 func deliveryMethods() {
-	cl := yandexdelivery.NewYandexClient("https://b2b.taxi.tst.yandex.net", false)
+	cl := yandexdelivery.NewYandexClient("https://b2b.taxi.tst.yandex.net", true)
 	methods, err := cl.DeliveryMethods(os.Getenv("YandexToken"),
 		yaModels.DeliveryMethodsRequest{
 			FullName: "улица Льва Толстого, 16, Москва",
