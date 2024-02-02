@@ -128,8 +128,13 @@ func (yc *YandexClient) TrackingLinks(token string, opts *options.TrackingLinksO
 }
 
 // ConfirmationCode 6.1. Получение кода подтверждения https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsConfirmationCode.html
-func (yc *YandexClient) ConfirmationCode(token string, opts *options.ConfirmationCodeOptions) (res responses.APIResponseConfirmationCode, err error) {
-	return post[responses.APIResponseConfirmationCode](yc.debugMode, token, yc.url, methodConfirmationCode, addValues(nil, opts), nil)
+func (yc *YandexClient) ConfirmationCode(token string, payload models.ConfirmationCodeRequest) (responses.APIResponseConfirmationCode, error) {
+	jsn, err := json.Marshal(payload)
+	if err != nil {
+		return responses.APIResponseConfirmationCode{}, err
+	}
+
+	return post[responses.APIResponseConfirmationCode](yc.debugMode, token, yc.url, methodConfirmationCode, nil, jsn)
 }
 
 // Document 6.2. Получение акта приёма-передачи https://yandex.ru/dev/logistics/api/ref/confirmation-code-and-acts/IntegrationV2ClaimsDocument.html

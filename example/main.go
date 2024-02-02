@@ -11,6 +11,7 @@ func main() {
 	//deliveryMethods()
 	//checkPrice()
 	tariffs()
+	offersCalc()
 }
 
 func deliveryMethods() {
@@ -84,4 +85,27 @@ func tariffs() {
 	}
 
 	fmt.Println(trfs.AvailableTariffs)
+}
+
+func offersCalc() {
+	cl := yandexdelivery.NewYandexClient("https://b2b.taxi.tst.yandex.net", true)
+	of, err := cl.OffersCalculate(os.Getenv("YandexToken"),
+		yaModels.OffersCalculateRequest{
+			Items: []yaModels.DeliveryItem{
+				{
+					Quantity: 1,
+					Size: &yaModels.Size{
+						Height: 0.1,
+						Length: 0.1,
+						Width:  0.1,
+					},
+					Weight: 2,
+				},
+			},
+		})
+	if err != nil {
+		return
+	}
+
+	fmt.Println(of)
 }
