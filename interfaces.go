@@ -1,9 +1,9 @@
 package yandexdelivery
 
 import (
-	"github.com/vildan-valeev/yandexlogistic/models"
-	"github.com/vildan-valeev/yandexlogistic/options"
-	"github.com/vildan-valeev/yandexlogistic/responses"
+	"github.com/vildan-valeev/yandexdelivery/models"
+	"github.com/vildan-valeev/yandexdelivery/options"
+	"github.com/vildan-valeev/yandexdelivery/responses"
 )
 
 type YandexDelivery interface {

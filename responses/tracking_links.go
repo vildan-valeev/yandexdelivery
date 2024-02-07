@@ -1,6 +1,8 @@
 package responses
 
-import "github.com/vildan-valeev/yandexlogistic/models"
+import (
+	"github.com/vildan-valeev/yandexdelivery/models"
+)
 
 type APIResponseTrackingLinks struct {
 	models.TrackingLinksResponse
