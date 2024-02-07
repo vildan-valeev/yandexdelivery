@@ -42,8 +42,7 @@ type YandexClient struct {
 	token     string
 }
 
-func NewYandexClient(urlBase string, debugMode bool) *YandexClient {
-	// TODO: перенести токен в клиента
+func NewYandexClient(urlBase, token string, debugMode bool) *YandexClient {
 	u, err := url.JoinPath(urlBase, methodBase)
 	if err != nil {
 		log.Fatal(err)
@@ -51,5 +50,6 @@ func NewYandexClient(urlBase string, debugMode bool) *YandexClient {
 	return &YandexClient{
 		url:       u,
 		debugMode: debugMode,
+		token:     token,
 	}
 }

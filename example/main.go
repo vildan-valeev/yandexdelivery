@@ -8,15 +8,15 @@ import (
 )
 
 func main() {
-	//deliveryMethods()
+	deliveryMethods()
 	//checkPrice()
-	tariffs()
-	offersCalc()
+	//tariffs()
+	//offersCalc()
 }
 
 func deliveryMethods() {
-	cl := yandexdelivery.NewYandexClient("https://b2b.taxi.tst.yandex.net", true)
-	methods, err := cl.DeliveryMethods(os.Getenv("YandexToken"),
+	cl := yandexdelivery.NewYandexClient(os.Getenv("YandexURL"), os.Getenv("YandexToken"), true)
+	methods, err := cl.DeliveryMethods(
 		yaModels.DeliveryMethodsRequest{
 			FullName: "улица Льва Толстого, 16, Москва",
 			StartPoint: []float64{
@@ -31,8 +31,8 @@ func deliveryMethods() {
 }
 
 func checkPrice() {
-	cl := yandexdelivery.NewYandexClient("https://b2b.taxi.tst.yandex.net", true)
-	price, err := cl.CheckPrice(os.Getenv("YandexToken"),
+	cl := yandexdelivery.NewYandexClient(os.Getenv("YandexURL"), os.Getenv("YandexToken"), true)
+	price, err := cl.CheckPrice(
 		yaModels.CheckPriceRequest{
 			Items: []yaModels.DeliveryItem{
 				{
@@ -72,8 +72,8 @@ func checkPrice() {
 }
 
 func tariffs() {
-	cl := yandexdelivery.NewYandexClient("https://b2b.taxi.tst.yandex.net", true)
-	trfs, err := cl.Tariffs(os.Getenv("YandexToken"),
+	cl := yandexdelivery.NewYandexClient(os.Getenv("YandexURL"), os.Getenv("YandexToken"), true)
+	trfs, err := cl.Tariffs(
 		yaModels.TariffsRequest{
 			FullName: "улица Льва Толстого, 16, Москва",
 			StartPoint: []float64{
@@ -88,8 +88,8 @@ func tariffs() {
 }
 
 func offersCalc() {
-	cl := yandexdelivery.NewYandexClient("https://b2b.taxi.tst.yandex.net", true)
-	of, err := cl.OffersCalculate(os.Getenv("YandexToken"),
+	cl := yandexdelivery.NewYandexClient(os.Getenv("YandexURL"), os.Getenv("YandexToken"), true)
+	of, err := cl.OffersCalculate(
 		yaModels.OffersCalculateRequest{
 			Items: []yaModels.DeliveryItem{
 				{
