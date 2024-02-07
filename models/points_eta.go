@@ -1,8 +1,5 @@
 package models
 
-//type PointsEtaRequest struct {
-//}
-
 type PointsEtaResponse struct {
 	ID                string    `json:"id"`
 	PerformerPosition []float64 `json:"performer_position"`

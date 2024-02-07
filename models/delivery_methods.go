@@ -36,7 +36,6 @@ type TariffRequirement struct {
 type TariffRequirementOption struct {
 	Text  string `json:"text"`
 	Title string `json:"title"`
-	//Value string `json:"value"`
 }
 
 type SameDayDelivery struct {

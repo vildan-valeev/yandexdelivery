@@ -4,9 +4,6 @@ import (
 	"errors"
 )
 
-//type InfoRequest struct {
-//}
-
 type Claim struct {
 	AvailableCancelState string             `json:"available_cancel_state"`
 	CallbackProperties   CallbackProperties `json:"callback_properties"`

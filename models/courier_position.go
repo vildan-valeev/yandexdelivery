@@ -1,8 +1,5 @@
 package models
 
-//type CourierPositionRequest struct {
-//}
-
 type CourierPositionResponse struct {
 	Position    CourierPosition `json:"position"`
 	RoutePoints []CourierPoint  `json:"route_points"`

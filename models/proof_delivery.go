@@ -1,8 +1,5 @@
 package models
 
-//type ProofDeliveryRequest struct {
-//}
-
 type ProofDeliveryResponse struct {
 	ProofDelivery ProofDelivery `json:"proof_delivery"`
 }
